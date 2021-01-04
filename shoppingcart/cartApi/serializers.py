@@ -152,7 +152,7 @@ class VariationSerializer(serializers.ModelSerializer):
         )
 
     def get_product_variations(self, obj):
-        return ProductVariationSerializer(obj.itemvariation_set.all(), many=True).data
+        return ProductVariationSerializer(obj.productvariation_set.all(), many=True).data
 
 
 class ProductDetailSerializer(serializers.ModelSerializer):
@@ -171,7 +171,7 @@ class ProductDetailSerializer(serializers.ModelSerializer):
             'label',
             'slug',
             'description',
-            'image',
+            'imageLink',
             'createdAt',
             'updatedAt',
             'variations'

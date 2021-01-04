@@ -1,10 +1,11 @@
+import stripe
+from django.conf import settings
 from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
 # from django_countries import countries
 from django.db.models import Q
-from django.conf import settings
-from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import (
@@ -13,18 +14,15 @@ from rest_framework.generics import (
 )
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
-from cartApi.models import Product, OrderItem, Order
+from rest_framework.views import APIView
+
+from cartApi.models import (Product, OrderItem, Order, Address, Payment, Coupon, UserProfile, Variation)
 from cartApi.serializers import (
     ProductSerializer, OrderSerializer, ProductDetailSerializer, AddressSerializer,
     PaymentSerializer
 )
-from cartApi.models import (Product, OrderItem, Order, Address, Payment, Coupon, Refund, UserProfile, Variation,
-                            ProductVariation)
-
-import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 

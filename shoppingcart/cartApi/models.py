@@ -103,20 +103,20 @@ class ProductVariation(models.Model):
 
 
 class OrderItem(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    productId = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
     product_variations = models.ManyToManyField(ProductVariation)
     price = models.FloatField()
 
     def __str__(self):
-        return f"{self.quantity} of {self.product.title}"
+        return f"{self.quantity} of {self.productId.title}"
 
     def get_total_product_price(self):
-        price = self.quantity * self.product.price
+        price = self.quantity * self.productId.price
         return price
 
     def get_total_discount_product_price(self):
-        return self.quantity * self.product.discount_price
+        return self.quantity * self.productId.discount_price
 
     def get_amount_saved(self):
         return self.get_total_product_price() - self.get_total_discount_product_price()
