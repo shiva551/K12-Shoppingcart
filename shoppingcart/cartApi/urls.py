@@ -17,6 +17,7 @@ from cartApi.views import (
     PaymentListView
 )
 
+
 urlpatterns = [
     path('user-id/', UserIDView.as_view(), name='user-id'),
     # path('countries/', CountryListView.as_view(), name='country-list'),

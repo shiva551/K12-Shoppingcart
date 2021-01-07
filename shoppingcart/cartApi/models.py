@@ -35,19 +35,19 @@ MODE_OF_PAYMENT = (
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(
+    user = models.ForeignKey(
         User, on_delete=models.CASCADE)
     stripe_customer_id = models.CharField(max_length=50, blank=True, null=True)
     one_click_purchasing = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user.username
+        return self.user
 
 
 class Product(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    imageLink = models.ImageField()
+    imageLink = models.FileField()
     price = models.FloatField()
     createdAt = models.DateField(auto_now_add=True)
     updatedAt = models.DateField(auto_now=True)
@@ -149,7 +149,7 @@ class Order(models.Model):
     refund_granted = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user.username
+        return self.user
 
     def get_total(self):
         total = 0
@@ -171,7 +171,7 @@ class Address(models.Model):
     default = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user.username
+        return self.user
 
     class Meta:
         verbose_name_plural = 'Addresses'

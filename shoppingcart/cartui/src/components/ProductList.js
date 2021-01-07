@@ -26,8 +26,8 @@ class ProductList extends React.Component {
 
     componentDidMount() {
         this.setState({loading: true});
-        axios
-            .get(productListURL)
+
+        axios.get(productListURL)
             .then(res => {
                 this.setState({data: res.data, loading: false});
             })
@@ -71,45 +71,45 @@ class ProductList extends React.Component {
                     </Segment>
                 )}
                 <Item.Group divided>
-                    {data.map(product => {
+                    {data.map(item => {
                         return (
-                            <Item key={product.id}>
-                                <Item.Image src={product.image}/>
+                            <Item key={item.id}>
+                                <Item.Image src={item.imageLink}/>
                                 <Item.Content>
                                     <Item.Header
                                         as="a"
                                         onClick={() =>
-                                            this.props.history.push(`/products/${product.id}`)
+                                            this.props.history.push(`products/${item.id}`)
                                         }
                                     >
-                                        {product.title}
+                                        {item.title}
                                     </Item.Header>
                                     <Item.Meta>
-                                        <span className="cinema">{product.category}</span>
+                                        <span className="cinema">{item.category}</span>
                                     </Item.Meta>
-                                    <Item.Description>{product.description}</Item.Description>
+                                    <Item.Description>{item.description}</Item.Description>
                                     <Item.Extra>
-                                        <Button
-                                            primary
-                                            floated="right"
-                                            icon
-                                            labelPosition="right"
-                                            onClick={() => this.handleAddToCart(product.slug)}
-                                        >
-                                            Add to cart
-                                            <Icon name="cart plus"/>
-                                        </Button>
-                                        {product.discount_price && (
+                                        {/*<Button*/}
+                                        {/*    primary*/}
+                                        {/*    floated="right"*/}
+                                        {/*    icon*/}
+                                        {/*    labelPosition="right"*/}
+                                        {/*    onClick={() => this.handleAddToCart(item.slug)}*/}
+                                        {/*>*/}
+                                        {/*    Add to cart*/}
+                                        {/*    <Icon name="cart plus"/>*/}
+                                        {/*</Button>*/}
+                                        {item.discount_price && (
                                             <Label
                                                 color={
-                                                    product.label === "primary"
+                                                    item.label === "primary"
                                                         ? "blue"
-                                                        : product.label === "secondary"
+                                                        : item.label === "secondary"
                                                         ? "green"
                                                         : "olive"
                                                 }
                                             >
-                                                {product.label}
+                                                {item.label}
                                             </Label>
                                         )}
                                     </Item.Extra>

@@ -115,7 +115,7 @@ class ProductDetail extends React.Component {
                         <Grid.Column>
                             <Card
                                 fluid
-                                image={item.image}
+                                image={item.imageLink}
                                 header={item.title}
                                 meta={
                                     <React.Fragment>

@@ -1,7 +1,7 @@
 import stripe
 from django.conf import settings
 from django.contrib import messages
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, FieldDoesNotExist
 # from django_countries import countries
 from django.db.models import Q
 from django.http import Http404
@@ -32,12 +32,7 @@ class UserIDView(APIView):
         return Response({'userID': request.user.id}, status=HTTP_200_OK)
 
 
-class ProductPagination(PageNumberPagination):
-    page_size = 5
-
-
 class ProductListView(ListAPIView):
-    pagination_class = ProductPagination
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('id', 'title', 'price', 'slug', 'category')
     permission_classes = (AllowAny,)
